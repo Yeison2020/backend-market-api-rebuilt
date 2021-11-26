@@ -5,8 +5,10 @@ class CreateItems < ActiveRecord::Migration[6.1]
       t.text :desc
       t.float :price
       t.boolean :sold
-      t.references :seller, foreing_key: {to_table: 'users'}
-      t.references :buyer, foreing_key: {to_table: 'users'}
+      t.references :seller, foreign_key: { to_table: 'users'}
+      t.references :buyer, foreign_key: { to_table: 'users'}
+     
+
       t.timestamps
     end
   end
