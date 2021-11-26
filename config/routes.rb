@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   # resources :category_items
   # resources :categories
-  resources :items, only: [:index, :show, :create]
-  resources :users, only: [:create]
+  resources :items, only: [:index, :show, :create, :update, :destroy]
+  resources :users, only: [:create, :destroy]
 
   # Customs routes 
 

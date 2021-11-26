@@ -10,9 +10,9 @@ class ItemsController < ApplicationController
         end
 
     end
-
+    # 2 render one specific item 
     def show
-        # render one specific item 
+        
         item = Item.find_by(id: params[:id])
         if item 
             render json: item 
@@ -23,8 +23,10 @@ class ItemsController < ApplicationController
 
     end
 
+
+    # 3. current user is creating items using sold_items association check user model to confirm
     def create  
-        #current user is creating items using sold_items association check user model to confirm
+        
         item = current_user.sold_items.create(item_params)
         if item.valid?
             render json: item, status: :created 
@@ -33,21 +35,50 @@ class ItemsController < ApplicationController
 
         end
     end
+    # 4. update the item  
 
-    def sold
-        item = Item.find_by(id: params[:id])
-        if item
-            item.update(sold: true, buyer_id: current_user.id )
-            render json: item, status: :ok 
+    def update
+        item = Item.find_by(:id: params[:id])
+        if item && item.update(item_params)
+            render json: item, status: :ok
         else
-            render json: {error: 'Item no Found'}, status: :unprocessable_entity
+            render json: {error: item.errors.full_messages}, status: :unprocessable_entity  
         end
+
     end
 
+
+    # 5. deletes the item from the database 
+
+
+    def destroy
+        
+        item = Item.find_by(id: params[:id])
+        if item.valid? 
+            item.destroy 
+            head :not_content 
+        else
+            render json: {error: 'Item no found'}, status: :unprocessable_entity  
+        end
+
+    end
+
+        
+    # 6. update avaibility of the item to sold
+        def sold
+            item = Item.find_by(id: params[:id])
+            if item
+                item.update(sold: true, buyer_id: current_user.id )
+                render json: item, status: :ok 
+            else
+                render json: {error: 'Item no Found'}, status: :unprocessable_entity
+            end
+        end
+
+    # 7 
     def purchased_items
         buyer = User.find(params[:id])
         if buyer.valid? 
-
             purchased_items = buyer.purchased_items 
             render json: purchased_items
         else
