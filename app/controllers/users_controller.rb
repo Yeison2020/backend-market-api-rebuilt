@@ -9,7 +9,7 @@ class UsersController < ApplicationController
             
         end
     end
-
+    # Notes here this action need work to delete current user
     def destroy  
         user = User.find_by(id: params[:id])
         if user.valid? 
@@ -22,10 +22,9 @@ class UsersController < ApplicationController
 
 
 private 
-
+# Deafult user can be buyer and seller
 def user_params
     params.permit(:username, :email) 
-
 end
 
 
