@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Creating users:
-aisayo = User.create(username: "enmanuel", email: "enmaul6565.com")
+aisayo = User.create(username: "enmanuel", email: "enmaul6565@123.com")
 bob_is_cool = User.create(username: 'angel', email: 'angel8797@123.com')
 
 # Creating categories:

@@ -1,8 +1,9 @@
 class CreateCategoryItems < ActiveRecord::Migration[6.1]
   def change
     create_table :category_items do |t|
-      t.belongs_to :category, null: false, foreign_key: true
-      t.belongs_to :item, null: false, foreign_key: true
+      t.integer :category_id
+      t.integer :item_id
+
 
       t.timestamps
     end

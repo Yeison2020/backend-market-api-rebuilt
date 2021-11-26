@@ -19,12 +19,10 @@ ActiveRecord::Schema.define(version: 2021_11_25_232931) do
   end
 
   create_table "category_items", force: :cascade do |t|
-    t.integer "category_id", null: false
-    t.integer "item_id", null: false
+    t.integer "category_id"
+    t.integer "item_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_category_items_on_category_id"
-    t.index ["item_id"], name: "index_category_items_on_item_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -47,8 +45,6 @@ ActiveRecord::Schema.define(version: 2021_11_25_232931) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "category_items", "categories"
-  add_foreign_key "category_items", "items"
   add_foreign_key "items", "users", column: "buyer_id"
   add_foreign_key "items", "users", column: "seller_id"
 end
